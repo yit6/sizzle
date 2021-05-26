@@ -54,6 +54,6 @@ loops the pointer around, the "`.`" printing to the screen the "`{`" turns the p
 |{|peek stack, if 0 turn left, else ignore|
 |}|peek stack, if 0 turn right, else ignore|
 |x|remove top of stack|
-|\\|switch primary and secondary stacks|
+| \\ |switch primary and secondary stacks|
 |s|stack output, print stack with spaces separating values, top of stack changes mode, a ascii, x hex, 1 integer|
 |S|stack input, push input stack with spaces separating values, top of stack changes mode, a ascii, x hex, 1 integer|
