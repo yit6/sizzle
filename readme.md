@@ -1,4 +1,4 @@
-#Sizzle
+# Sizzle
 
 Two dimensional langauge, like [befunge](https://en.wikipedia.org/wiki/Esoteric_programming_language#Befunge), the programm is a grid of characters. Example:
 
@@ -30,7 +30,7 @@ loops the pointer around, the "`.`" printing to the screen the "`{`" turns the p
 
 
 
-##Commands:
+## Commands:
 
 |letter|description|
 |------|-----------|
