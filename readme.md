@@ -50,7 +50,7 @@ loops the pointer around, the "`.`" printing to the screen the "`{`" turns the p
 |/|  pop top two values on stack, the put quotient on top of stack|
 |%|pop top two values on stack, the put modulo/remainder on top of stack|
 |"|string mode, push ascii values until next quote|
-|0|9 push number to stack|
+|0-9| push number to stack|
 |{|peek stack, if 0 turn left, else ignore|
 |}|peek stack, if 0 turn right, else ignore|
 |x|remove top of stack|
