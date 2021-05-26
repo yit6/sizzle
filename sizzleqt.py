@@ -1,30 +1,29 @@
-import time
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout, QPushButton, QWidget, QApplication, QListWidget, QListWidgetItem, QLabel, QGridLayout, QSpacerItem
+import sys,os,time
 import random
-import sys
-import os
+
+app = QApplication(sys.argv)
+
+stack0 = []
+stack1 = []
+
+programSpacing = QVBoxLayout()
+programGrid = QGridLayout()
+program = []
 
 args = sys.argv[1:]
-debug = False
-delay = False
+
+stringmode = False
 
 if os.path.isfile(args[0]):
     file = open(args[0],'r')
     program = file.read().splitlines()
     file.close()
     args = args[1:]
-
 else:
     sys.stderr.write("Cannot find file")
     exit()
-
-if "--debug" in args:
-    debug = True
-    print(program)
-    args.remove("--debug")
-
-if "--delay" in args:
-    delay = True
-    args.remove("--delay")
 
 x = 0
 y = 0 
@@ -35,7 +34,56 @@ stack1 = []
 dimx = len(program[0])
 dimy = len(program)
 
-stringmode = False
+for i in range(len(program)):
+    for j in range(len(program[i])):
+        label = QLabel(program[i][j])
+        label.setStyleSheet("""
+            QWidget {
+            background-color:rgb(30,30,30);
+            font-family:mono;
+            }
+        """)
+        programGrid.addWidget(label,i,j)
+
+window = QWidget()
+
+layout = QHBoxLayout()
+
+stack0List = QListWidget()
+stack1List = QListWidget()
+
+rightLayout = QVBoxLayout()
+
+buttonLayout = QHBoxLayout()
+stacks = QHBoxLayout()
+
+stacks.addWidget(stack0List)
+stacks.addWidget(stack1List)
+
+for i in stack0:
+    QListWidgetItem(str(i),stack0List)
+for i in stack1:
+    QListWidgetItem(str(i),stack1List)
+
+programSpacing.addLayout(programGrid)
+programSpacing.addStretch(20)
+
+layout.addLayout(programSpacing)
+
+layout.addLayout(rightLayout)
+
+start = QPushButton("start")
+stop = QPushButton("stop")
+stepButton = QPushButton("step")
+
+buttonLayout.addWidget(start)
+buttonLayout.addWidget(stop)
+buttonLayout.addWidget(stepButton)
+
+rightLayout.addLayout(buttonLayout)
+rightLayout.addLayout(stacks)
+
+window.setLayout(layout)
 
 def step():
     global x,y,stringmode,d,stack0,stack1
@@ -167,10 +215,16 @@ def step():
     if y == dimy: y = 0
     if x < 0: x = dimx -1
     if y < 0: y = dimy -1
-    
-while True:
-    step()
-    if debug:
-        print("debug: ",command,d,stringmode,stack0)
-    if delay:
-        time.sleep(.25)
+
+    stack0List.clear()
+    stack1List.clear()
+
+    for i in stack0:
+        QListWidgetItem(str(i),stack0List)
+    for i in stack1:
+        QListWidgetItem(str(i),stack1List)
+
+stepButton.clicked.connect(step)
+
+window.show()
+app.exec_()

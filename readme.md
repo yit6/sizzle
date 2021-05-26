@@ -28,7 +28,7 @@ The
 ```
 loops the pointer around, the "`.`" printing to the screen the "`{`" turns the pointer to the left when zero is on top of the stack, after turning left it runs over the `q` quitting the program.
 
-
+If the pointer runs off the edge, it reappears like pacman or astroids.
 
 ## Commands:
 
